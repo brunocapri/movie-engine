@@ -1,0 +1,24 @@
+package pages
+
+import "github.com/brunocapri/movie-engine/internal/domain"
+import "github.com/brunocapri/movie-engine/internal/templates/shared"
+
+
+templ Search(movies []domain.Movie) {
+  @shared.Page(){
+    <h2>SEARCH</h2>
+    <form method="get" action="/search">
+      <div>
+          <label>Search</label>
+          <input type="text" name="q" id="query" />
+      </div>
+      <button type="submit">submit</button>
+    </form>
+    <div>
+      for _, movie := range movies {
+        <img src={movie.Poster} alt="Movie Poster" />
+        <p>{movie.Title}</p>
+      }
+    </div> 
+  }
+}
