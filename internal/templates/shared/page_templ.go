@@ -10,6 +10,8 @@ import "context"
 import "io"
 import "bytes"
 
+import "github.com/brunocapri/movie-engine/internal/templates/components"
+
 func Page() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
@@ -23,7 +25,19 @@ func Page() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\" class=\"h-full\"><head><meta charset=\"UTF-8\"><title>Movie Engine</title><link rel=\"icon\" type=\"image/svg+xml\" href=\"/dist/favicon.svg\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"robots\" content=\"index, follow\"><meta name=\"revisit-after\" content=\"7 days\"><meta name=\"language\" content=\"English\"><script src=\"https://unpkg.com/htmx.org@1.9.2\" integrity=\"sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h\" crossorigin=\"anonymous\"></script><script src=\"https://unpkg.com/hyperscript.org@0.9.8\"></script><link rel=\"stylesheet\" href=\"/dist/styles.css\"></head><body class=\"h-full bg-neutral-900\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\" class=\"h-full\"><head><meta charset=\"UTF-8\"><title>Movie Engine</title><link rel=\"icon\" type=\"image/svg+xml\" href=\"/dist/favicon.svg\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"language\" content=\"English\"><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script><link href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&amp;display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/dist/styles.css\"></head><body class=\"bg-neutral-900\"><div class=\"flex justify-center min-h-screen\"><div class=\"w-full max-w-4xl p-4\"><!-- Header Section --><header class=\"mb-8\"><div class=\"flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.Logo().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.SearchBar().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></header><!-- Main Content Section --><div class=\"flex flex-col\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -31,7 +45,7 @@ func Page() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

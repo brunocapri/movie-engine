@@ -1,18 +1,15 @@
 package handlers
 
 import (
-	"github.com/brunocapri/movie-engine/internal/config"
-	"github.com/brunocapri/movie-engine/internal/repository"
+	"github.com/brunocapri/movie-engine/internal/core"
 )
 
 type Handler struct {
-	app    *config.Application
-	movies *repository.MovieRepository
+	core *core.Core
 }
 
-func NewHandler(app *config.Application, movies *repository.MovieRepository) *Handler {
+func NewHandler(core *core.Core) *Handler {
 	return &Handler{
-		app:    app,
-		movies: movies,
+		core: core,
 	}
 }

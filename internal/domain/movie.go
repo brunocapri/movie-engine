@@ -1,6 +1,10 @@
 package domain
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/google/uuid"
+)
 
 type Rating struct {
 	Source string `json:"Source"`
@@ -8,6 +12,7 @@ type Rating struct {
 }
 
 type Movie struct {
+	Id         uuid.UUID       `json:"id"`
 	Title      string          `json:"Title"`
 	Year       string          `json:"Year"`
 	Rated      string          `json:"Rated"`
@@ -32,4 +37,5 @@ type Movie struct {
 	BoxOffice  string          `json:"BoxOffice"`
 	Production string          `json:"Production"`
 	Website    string          `json:"Website"`
+	Embedding  string          `json:"embedding"`
 }

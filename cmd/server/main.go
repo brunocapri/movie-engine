@@ -6,7 +6,9 @@ import (
 	"os"
 	"time"
 
+	"github.com/brunocapri/movie-engine/internal/cache"
 	"github.com/brunocapri/movie-engine/internal/config"
+	"github.com/brunocapri/movie-engine/internal/core"
 	"github.com/brunocapri/movie-engine/internal/handlers"
 	"github.com/brunocapri/movie-engine/internal/repository"
 	"github.com/brunocapri/movie-engine/openai"
@@ -18,17 +20,16 @@ func main() {
 	mux := config.InitMux()
 	db := config.InitDb(cfg.DB())
 	openAiClient := openai.NewClient(cfg.OpenAIUri(), cfg.OpenAIKey())
+	cache := cache.NewCache(30 * time.Second)
 
 	app := &config.Application{
-		Config:       cfg,
-		Mux:          mux,
-		Db:           db,
 		OpenAiClient: openAiClient,
+		Cache:        &cache,
 	}
 
 	movies := repository.NewMovieRepository(db)
-
-	handlers := handlers.NewHandler(app, movies)
+	core := core.NewCore(app, movies)
+	handlers := handlers.NewHandler(core)
 	mux.Get("/", handlers.GetHome)
 	mux.Get("/search", handlers.GetSearch)
 

@@ -5,16 +5,15 @@ import (
 	"log"
 
 	"github.com/brunocapri/movie-engine/internal/assets"
+	"github.com/brunocapri/movie-engine/internal/cache"
 	"github.com/brunocapri/movie-engine/openai"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 )
 
 type Application struct {
-	Config       Config
-	Db           *sql.DB
-	Mux          *chi.Mux
 	OpenAiClient *openai.Client
+	Cache        *cache.Cache
 }
 
 func InitMux() *chi.Mux {
