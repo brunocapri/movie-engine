@@ -1,6 +1,6 @@
 # 🚂 Movie Engine
 
-Movie engine is an under-development, open-source semantic search engine built in Go, templ, tailwind and Postgres.
+Movie engine is a toy project to search movies semantically built in Go, templ, tailwind and Postgres.
 
 It works by generating embedding vectors from an extensive selection of movie plots. Each time the user enters a query, their input is converted into a vector. This vector is then compared with those of the movies, retrieving the closest matches to their search.
 
