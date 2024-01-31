@@ -8,6 +8,7 @@ tasks:
     cmds:
       - npm install
       - go install github.com/a-h/templ/cmd/templ@latest
+      - go install github.com/cosmtrek/air@latest
       - go mod tidy
   assets:
     desc: Build the assets
