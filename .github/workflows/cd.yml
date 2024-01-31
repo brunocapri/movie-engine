@@ -43,4 +43,4 @@ jobs:
       #   run: ./scripts/migrateup.sh
 
       - name: 'Deploy to Cloud Run'
-        run: 'gcloud run deploy notely --image  us-central1-docker.pkg.dev/movie-engine-412823/movie-engine-ar-repo/movie-engine:latest --region us-central1 --allow-unauthenticated --project movie-engine-412823'
+        run: 'gcloud run deploy movie-engine --image  us-central1-docker.pkg.dev/movie-engine-412823/movie-engine-ar-repo/movie-engine:latest --region us-central1 --allow-unauthenticated --project movie-engine-412823'
