@@ -2,6 +2,8 @@
 
 Movie engine is an under-development, open-source semantic search engine built in Go, templ, tailwind and Postgres.
 
+The app is live [here](https://movie-engine-zjnztlkezq-uc.a.run.app/)
+
 It works by generating embedding vectors from an extensive selection of movie plots. Each time the user enters a query, their input is converted into a vector. This vector is then compared with those of the movies, retrieving the closest matches to their search.
 
 Open AI [Embeddings API](https://platform.openai.com/docs/guides/embeddings) was used to create the movie plots and user queries embeddings. `text-embedding-3-small` model is very very cheap and produces good results.
