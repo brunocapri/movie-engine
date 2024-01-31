@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -16,7 +17,7 @@ type Config struct {
 
 func InitConfig() Config {
 	if err := godotenv.Load(".env"); err != nil {
-		log.Fatal(err)
+		fmt.Println("No local .env found")
 	}
 
 	cfg := Config{}
@@ -35,6 +36,7 @@ func InitConfig() Config {
 		}
 	}
 	return cfg
+
 }
 
 func (c Config) Port() string {

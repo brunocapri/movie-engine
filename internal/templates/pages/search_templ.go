@@ -12,6 +12,7 @@ import "bytes"
 
 import "github.com/brunocapri/movie-engine/internal/domain"
 import "github.com/brunocapri/movie-engine/internal/templates/shared"
+import "github.com/brunocapri/movie-engine/internal/utils"
 
 func Search(movies []domain.Movie) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
@@ -55,7 +56,7 @@ func Search(movies []domain.Movie) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(movies[0].Title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 14, Col: 44}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 15, Col: 44}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -68,7 +69,7 @@ func Search(movies []domain.Movie) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(movies[0].Year)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 14, Col: 64}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 15, Col: 64}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -81,7 +82,7 @@ func Search(movies []domain.Movie) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(movies[0].Plot)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 15, Col: 52}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 16, Col: 52}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -94,26 +95,49 @@ func Search(movies []domain.Movie) templ.Component {
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(movies[0].Director)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 16, Col: 42}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 17, Col: 42}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p></div><div class=\"flex items-center justify-between mt-4\"><span class=\"flex items-center\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5 text-red-500\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zM8 9a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0zm-3 6a5 5 0 00-4-4h8a5 5 0 00-4 4z\" clip-rule=\"evenodd\"></path></svg> <span class=\"ml-1\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p></div><div class=\"flex items-start flex-col mt-4\"><span class=\"flex items-center\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var7 string
-			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(movies[0].Runtime)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 23, Col: 45}
+			if utils.Filter[domain.Rating](movies[0].Ratings, func(r domain.Rating) bool { return r.Source == "Rotten Tomatoes" }) != nil {
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<img src=\"dist/tomato.svg\"> <span class=\"ml-1\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var7 string
+				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(utils.Filter[domain.Rating](movies[0].Ratings, func(r domain.Rating) bool { return r.Source == "Rotten Tomatoes" })[0].Value)
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 23, Col: 151}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span> <span class=\"flex items-center\"><img src=\"dist/clock.svg\"> <span class=\"ml-1\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></span> <span class=\"flex items-center\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5 text-red-500\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3 10h2a2 2 0 012 2v10a2 2 0 002 2h6m8-6h2m-2 4h2\"></path></svg> <span class=\"ml-1\">91%</span></span></div></div></div><div class=\"my-8 flex flex-col\"><p class=\"text-xl text-white mb-3\">Similar movies</p><div class=\"flex flex-row\">")
+			var templ_7745c5c3_Var8 string
+			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(movies[0].Runtime)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/search.templ`, Line: 28, Col: 45}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></span></div></div></div><div class=\"my-8 flex flex-col\"><p class=\"text-xl text-white mb-3\">Similar movies</p><div class=\"flex flex-row\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -122,8 +146,8 @@ func Search(movies []domain.Movie) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				var templ_7745c5c3_Var8 templ.SafeURL = templ.URL("/search?from=" + movies[i].Id.String())
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var8)))
+				var templ_7745c5c3_Var9 templ.SafeURL = templ.URL("/search?from=" + movies[i].Id.String())
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var9)))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

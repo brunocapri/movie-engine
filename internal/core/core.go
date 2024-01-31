@@ -54,7 +54,10 @@ func (c Core) GetSimilarMovies(movie domain.Movie, search bool) (movies []domain
 	}
 
 	if search {
-		movie, _ = c.movies.FindById(movie.Id)
+		movie, err = c.movies.FindById(movie.Id)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	movies, err = c.movies.FindSimilar(movie)

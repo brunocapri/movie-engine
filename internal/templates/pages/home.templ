@@ -3,6 +3,9 @@ package pages
 import "github.com/brunocapri/movie-engine/internal/templates/shared"
 
 templ Home() {
-  @shared.Page() {
-  }
+	@shared.Page() {
+		<p class="text-neutral-700 text-4xl">
+			movie engine is an under-development, open-source semantic search engine. it works by generating embedding vectors from an extensive selection of movie plots. each time you enter a query in the search box above, your input is converted into a vector. this vector is then compared with those of the movies, retrieving the closest matches to your search. you can see the code <a class="text-blue-600" href="https://github.com/brunocapri/movie-engine">here</a>.
+		</p>
+	}
 }

@@ -31,6 +31,10 @@ func Home() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p class=\"text-neutral-700 text-4xl\">movie engine is an under-development, open-source semantic search engine. it works by generating embedding vectors from an extensive selection of movie plots. each time you enter a query in the search box above, your input is converted into a vector. this vector is then compared with those of the movies, retrieving the closest matches to your search. you can see the code <a class=\"text-blue-600\" href=\"https://github.com/brunocapri/movie-engine\">here</a>.</p>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 			if !templ_7745c5c3_IsBuffer {
 				_, templ_7745c5c3_Err = io.Copy(templ_7745c5c3_W, templ_7745c5c3_Buffer)
 			}
